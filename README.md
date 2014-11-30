@@ -1,4 +1,4 @@
-# Sortboard
+# Sortboard [![Build Status](http://img.shields.io/travis/joseluisq/sortboardjs.svg?style=flat-square)](https://travis-ci.org/joseluisq/sortboardjs)
 
 Easy sorting and filtering of elements.
 
@@ -45,7 +45,7 @@ Markup :
   * `sortComplete` : Callback function when sorting is completed.
 
 **Methods :**
-    
+
   * `sort()` : Sort items.
   * `filterBy(string)` : String it's text to filter, it should match to `data-filter` attribute for items.
   * `getFilter()` : Gets the current filter string.
