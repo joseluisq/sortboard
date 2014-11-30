@@ -4,6 +4,12 @@ Easy sorting and filtering of elements.
 
 [View demo](http://goo.gl/5cY8M1)
 
+
+## Install
+```sh
+$ bower install sortboard
+```
+
 ## Usage
 
 Define a list, for example, using an `ul` and `li` tags, then sets your filters in each `li` tags with the `data-filter` attribute, it can add several filters for one item separated by whitespace.

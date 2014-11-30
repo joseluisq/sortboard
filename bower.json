@@ -1,0 +1,28 @@
+{
+  "name": "Sortboard",
+  "version": "1.0.0",
+  "homepage": "https://github.com/joseluisq/sortboardjs",
+  "authors": [
+    "Jose Luis Quintana <joseluisquintana20@gmail.com>"
+  ],
+  "description": "Easy sorting and filtering of elements.",
+  "main": "sortboard.js",
+  "moduleType": [
+    "global"
+  ],
+  "keywords": [
+    "sort",
+    "filter",
+    "sortlist",
+    "filterlist",
+    "responsive"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
