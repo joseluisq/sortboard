@@ -2,8 +2,9 @@
 
 Easy sorting and filtering of elements.
 
-[View demo](http://goo.gl/5cY8M1)
+> **Note:** This code uses CSS3 [`matrix()`](http://www.w3.org/TR/2011/WD-css3-2d-transforms-20111215/) transform function to translation.
 
+[View demo](http://goo.gl/5cY8M1)
 
 ## Install
 ```sh
