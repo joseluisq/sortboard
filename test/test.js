@@ -19,9 +19,7 @@ describe('Sortboard', function() {
   });
 
   it('class should be initialized successfully.', function() {
-    var sortlist = document.getElementById('sortlist');
     var sb = new Sortboard(sortlist);
-
     expect(sb).to.be.an('object');
   });
 
