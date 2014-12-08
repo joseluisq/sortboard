@@ -5,10 +5,10 @@
  * https://github.com/joseluisq/sortboardjs
  * MIT Licence
  */
-(function(window) {
+(function() {
   'use strict';
 
-  if (window.Sortboard) {
+  if (this.Sortboard) {
     return;
   }
 
@@ -207,7 +207,7 @@
     this.init(element, options);
   };
 
-  window.Sortboard = function(element, options) {
+  this.Sortboard = function(element, options) {
     var sb = new Sortboard(element, options);
 
     return {
@@ -231,4 +231,4 @@
       }
     };
   };
-})(this);
+}).call(this);
