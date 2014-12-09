@@ -8,7 +8,7 @@
 (function() {
   'use strict';
 
-  if (this.Sortboard) {
+  if (window.Sortboard) {
     return;
   }
 
@@ -207,7 +207,7 @@
     this.init(element, options);
   };
 
-  this.Sortboard = function(element, options) {
+  window.Sortboard = function(element, options) {
     var sb = new Sortboard(element, options);
 
     return {
@@ -231,4 +231,4 @@
       }
     };
   };
-}).call(this);
+})();
