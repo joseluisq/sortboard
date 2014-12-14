@@ -1,10 +1,25 @@
 {
-  "name": "Sortboard",
+  "name": "sortboard",
+  "author": "Jose Luis Quintana (https://github.com/joseluisq)",
   "version": "1.0.0",
   "description": "Easy sorting and filtering of elements.",
+  "keywords": [
+    "grid",
+    "sort",
+    "filter",
+    "sortlist",
+    "filterlist",
+    "responsive",
+    "jquery-plugin"
+  ],
   "license": "MIT",
-  "repository": "joseluisq/sortboardjs",
-  "author": "Jose Luis Quintana",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joseluisq/sortboardjs.git"
+  },
+  "dependencies": {
+    "jquery": ">=1.10.0"
+  },
   "devDependencies": {
     "chai": "^1.10.0",
     "grunt": "^0.4.5",
@@ -24,5 +39,9 @@
   },
   "scripts": {
     "test": "mocha test"
+  },
+  "bugs": {
+    "url": "https://github.com/joseluisq/sortboardjs/issues",
+    "email": "joseluisquintana20@gmail.com"
   }
 }

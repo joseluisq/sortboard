@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Sortboardjs</title>
+  <title>Sortboardjs jQuery</title>
 
   <style>
     body {
@@ -119,7 +119,7 @@
 </head>
 
 <body>
-  <h1>Sortboard</h1>
+  <h1>Sortboard (jQuery)</h1>
   <p>Easy sorting and filtering of elements.</p>
 
   <nav id="filters">
@@ -188,16 +188,17 @@
 
   </div>
 
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
   <script src="../src/sortboard.js"></script>
   <script>
     (function() {
       'use strict';
-      // Javascript Example
-      // ------------------
+
+      // jQuery Example
+      // --------------
 
       // Initializing the board.
-      var sortlist = document.getElementById('sortlist');
-      var sb = new Sortboard(sortlist, {
+      $('#sortlist').sortboard({
         gutter: 10,
         filterComplete: function(e) {
           console.log(e);
@@ -208,44 +209,39 @@
       });
 
       // Filtering
-      var i, filter,
-        links = document.getElementsByTagName('a');
+      var i, filter, links = $('#filters a');
 
       // Click link event callback
       function clickCallback() {
         return function() {
-          if (this.className !== 'active') {
+          if (!$(this).hasClass('active')) {
             resetActiveLinks();
 
             // Retrieve the filter value
-            filter = this.getAttribute('data-filter');
+            filter = $(this).attr('data-filter');
 
             // Filtering by retrieved value
-            sb.filterBy(filter);
+            $('#sortlist').sortboard('filterBy', filter);
 
             // Set active class for current link
-            this.className = 'active';
+            $(this).addClass('active');
 
             // Set filter class for sortlist
-            sortlist.className = (filter === 'all') ? '': 'filtered';
+            $('#sortlist').addClass((filter === 'all') ? '': 'filtered');
           }
         };
       }
 
       // Reset active link classes
       function resetActiveLinks() {
-        for (var i = 0; i < links.length; ++i) {
-          links[i].className = '';
-        }
+        links.removeAttr('class');
       }
 
       // Click event handler for each filter link
-      for (i = 0; i < links.length; ++i) {
-        links[i].addEventListener('click', clickCallback(), false);
-      }
+      links.on('click', clickCallback());
 
       // Default trigger for first filter link
-      clickCallback().apply(links[0], []);
+      links.first().trigger('click');
 
     })(this);
   </script>

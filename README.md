@@ -7,6 +7,15 @@ Easy sorting and filtering of elements.
 [View demo](http://goo.gl/RnaQWi)
 
 ## Install
+
+Npm
+
+```sh
+$ npm install sortboard
+```
+
+Bower
+
 ```sh
 $ bower install sortboard
 ```
@@ -26,6 +35,19 @@ var sb = new Sortboard(sortlist, {
   },
   sortComplete: function() {
     console.log('Sorting is completed.');
+  }
+});
+```
+
+jQuery support :
+```js
+$('#sortlist').sortboard({
+  gutter: 10,
+  filterComplete: function(e) {
+    console.log(e);
+  },
+  sortComplete: function() {
+    console.log('Sort is completed.');
   }
 });
 ```

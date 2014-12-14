@@ -207,28 +207,53 @@
     this.init(element, options);
   };
 
-  window.Sortboard = function(element, options) {
-    var sb = new Sortboard(element, options);
-
+  function SortboardFactory(instance) {
     return {
       filterBy: function(filter) {
-        sb.filterBy(filter);
+        instance.filterBy(filter);
       },
       sort: function() {
-        sb.sort();
+        instance.sort();
       },
       getFilter: function() {
-        return sb.currentFilter;
+        return instance.currentFilter;
       },
       getItems: function() {
-        return sb.elements;
+        return instance.elements;
       },
       getFoundItems: function() {
-        return sb.found;
+        return instance.found;
       },
       getNotFoundItems: function() {
-        return sb.notfound;
+        return instance.notfound;
       }
     };
+  }
+
+  window.Sortboard = function(element, options) {
+    return new SortboardFactory(new Sortboard(element, options));
   };
+
+  // jQuery support
+  if (window.jQuery) {
+    var sb, fn;
+
+    window.jQuery.fn.sortboard = function(options) {
+      if (typeof options === 'string') {
+        sb = this.data('sortboard');
+        fn = sb[options];
+
+        if (sb && typeof options === 'string' && fn) {
+          return fn.apply(this, Array.prototype.slice.call(arguments, 1));
+        } else {
+          window.jQuery.error('Method ' + options + ' is not supported on jQuery.sortboard.');
+        }
+      } else {
+        sb = new SortboardFactory(new Sortboard(this[0], options));
+        this.data('sortboard', sb);
+      }
+
+      return this;
+    };
+  }
 })();

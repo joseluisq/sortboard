@@ -49,6 +49,7 @@ module.exports = function(grunt) {
               connect.static(config.examples),
               function(req, res, next) {
                 if (req.url === ('/' + config.src + '/' + pkg.name.toLowerCase() + '.js')) {
+                  res.setHeader('content-type', 'text/javascript');
                   res.end(grunt.file.read('src/sortboard.js', 'utf-8'));
                 } else {
                   return next();
