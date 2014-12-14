@@ -37,6 +37,10 @@ var sb = new Sortboard(sortlist, {
     console.log('Sorting is completed.');
   }
 });
+
+// Filter by tag
+sb.filterBy('programing');
+
 ```
 
 jQuery support :
@@ -50,6 +54,10 @@ $('#sortlist').sortboard({
     console.log('Sort is completed.');
   }
 });
+
+// Filter by tag
+$('#sortlist').sortboard('filterBy', 'programing');
+
 ```
 
 Markup :
