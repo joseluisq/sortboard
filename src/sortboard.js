@@ -1,6 +1,6 @@
 /*
- * Sortboard v1.0.0
- * Release: 30/11/2014
+ * Sortboard v1.0.2
+ * Release: 07/01/2015
  * Author: Jose Luis Quintana <joseluisquintana20@gmail.com>
  * https://github.com/joseluisq/sortboardjs
  * MIT Licence
@@ -86,6 +86,7 @@
       sw = this.element.parentElement.offsetWidth;
       gutter = this.options.gutter;
       itemList = this.getElements(this.options.itemsMatchName);
+
       this.size = itemList.length;
       var regx = new RegExp('(' + this.options.hiddenClass.replace('.', '') + ')+', 'i');
 
@@ -182,8 +183,15 @@
     };
 
     this.translate = function(item, cords, hide) {
+      var hiddenClass = this.options.hiddenClass.replace('.', '');
       var matrix = 'matrix(1,0,0,1,' + cords + ') scale(' + (hide ? '0.001' : '1') + ')';
-      item.className = hide ? this.options.hiddenClass.replace('.', '') : '';
+
+      item.className = item.className.replace(new RegExp(hiddenClass, 'g'), '');
+
+      if (hide) {
+        item.className = item.className + ' ' + hiddenClass;
+      }
+
       item.style.setProperty('opacity', hide ? '0' : '1');
       item.style.setProperty('-webkit-transform', matrix);
       item.style.setProperty('-moz-transform', matrix);
@@ -192,7 +200,7 @@
 
     this.getElements = function(childrenName) {
       if (!this.elements.length) {
-        this.elements = childrenName.match(/^\.(.+)$/) ? this.element.getElementsByClassName(childrenName) : this.element.getElementsByTagName(childrenName);
+        this.elements = childrenName.match(/^\.(.+)$/) ? this.element.getElementsByClassName(childrenName.replace('.', '')) : this.element.getElementsByTagName(childrenName);
       }
 
       return this.elements;
