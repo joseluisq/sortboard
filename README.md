@@ -1,4 +1,4 @@
-# Sortboard [![Build Status](http://img.shields.io/travis/joseluisq/sortboardjs.svg?style=flat-square)](https://travis-ci.org/joseluisq/sortboardjs) [![Coveralls status](https://img.shields.io/coveralls/joseluisq/sortboardjs.svg?style=flat-square)](https://coveralls.io/r/joseluisq/sortboardjs?branch=master) 
+# Sortboard [![Build Status](http://img.shields.io/travis/joseluisq/sortboardjs.svg?style=flat-square)](https://travis-ci.org/joseluisq/sortboardjs)
 
 > Easy sorting and filtering of elements.
 
