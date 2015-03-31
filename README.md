@@ -1,6 +1,6 @@
-# Sortboard [![Build Status](http://img.shields.io/travis/joseluisq/sortboardjs.svg?style=flat-square)](https://travis-ci.org/joseluisq/sortboardjs)
+# Sortboard [![Build Status](http://img.shields.io/travis/joseluisq/sortboardjs.svg?style=flat-square)](https://travis-ci.org/joseluisq/sortboardjs) [![Coveralls status](https://img.shields.io/coveralls/joseluisq/sortboardjs.svg?style=flat-square)
 
-Easy sorting and filtering of elements.
+> Easy sorting and filtering of elements.
 
 **Note:** This code uses CSS3 [`matrix()`](http://www.w3.org/TR/2011/WD-css3-2d-transforms-20111215/) transform function to translation.
 
