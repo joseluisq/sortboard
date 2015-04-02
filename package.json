@@ -1,7 +1,7 @@
 {
   "name": "sortboard",
   "author": "Jose Luis Quintana (https://github.com/joseluisq)",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Easy sorting and filtering of elements.",
   "keywords": [
     "grid",

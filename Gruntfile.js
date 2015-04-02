@@ -1,4 +1,4 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
   'use strict';
 
   require('time-grunt')(grunt);
@@ -44,10 +44,10 @@ module.exports = function(grunt) {
       },
       livereload: {
         options: {
-          middleware: function(connect) {
+          middleware: function (connect) {
             return [
               connect.static(config.examples),
-              function(req, res, next) {
+              function (req, res, next) {
                 if (req.url === ('/' + config.src + '/' + pkg.name.toLowerCase() + '.js')) {
                   res.setHeader('content-type', 'text/javascript');
                   res.end(grunt.file.read('src/sortboard.js', 'utf-8'));
@@ -84,7 +84,7 @@ module.exports = function(grunt) {
   });
 
   // Server Tasks
-  grunt.registerTask('serve', 'Start the server and preview your app. --remote-access to allow remote access', function() {
+  grunt.registerTask('serve', 'Start the server and preview your app. --remote-access to allow remote access', function () {
     if (grunt.option('remote-access')) {
       grunt.config.set('connect.options.hostname', '0.0.0.0');
     }
@@ -96,7 +96,7 @@ module.exports = function(grunt) {
   });
 
   // Build Tasks
-  grunt.registerTask('build', function() {
+  grunt.registerTask('build', function () {
     grunt.task.run([
       'uglify:dist'
     ]);

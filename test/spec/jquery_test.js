@@ -4,9 +4,7 @@ var fs = require('fs');
 var jsdom = require('mocha-jsdom');
 var expect = require('chai').expect;
 
-describe('Sortboard (jQuery)', function() {
-  var Sortboard;
-  var sortlist;
+describe('Sortboard (jQuery)', function () {
   var $;
 
   jsdom({
@@ -16,28 +14,28 @@ describe('Sortboard (jQuery)', function() {
     ]
   });
 
-  before(function() {
+  before(function () {
     $ = global.window.jQuery;
     document.body.innerHTML = fs.readFileSync('test/test.html', 'utf-8');
   });
 
-  it('should be initialized successfully and it should be a jQuery instance', function() {
+  it('should be initialized successfully and it should be a jQuery instance', function () {
     var $sb = $('#sortlist').sortboard();
     expect($sb).to.be.instanceof($);
   });
 
-  describe('.sortComplete()', function() {
-    it('callback should be called successfully.', function(done) {
-      var $sb = $('#sortlist').sortboard({
+  describe('.sortComplete()', function () {
+    it('callback should be called successfully.', function (done) {
+      $('#sortlist').sortboard({
         sortComplete: done
       });
     });
   });
 
-  describe('.filterComplete()', function() {
-    it('callback should be called successfully.', function(done) {
+  describe('.filterComplete()', function () {
+    it('callback should be called successfully.', function (done) {
       var $sb = $('#sortlist').sortboard({
-        filterComplete: function() {
+        filterComplete: function () {
           done();
         }
       });
@@ -46,10 +44,10 @@ describe('Sortboard (jQuery)', function() {
     });
   });
 
-  describe('.filterComplete(data)', function() {
-    it('param value `data` should have `found` and `notfound` properties.', function(done) {
+  describe('.filterComplete(data)', function () {
+    it('param value `data` should have `found` and `notfound` properties.', function (done) {
       var $sb = $('#sortlist').sortboard({
-        filterComplete: function(data) {
+        filterComplete: function (data) {
           expect(data).to.have.property('found');
           expect(data).to.have.property('notfound');
           done();
@@ -59,9 +57,9 @@ describe('Sortboard (jQuery)', function() {
       $sb.sortboard('filterBy', 'first-line');
     });
 
-    it('`found` and `notfound` properties values should be an `Array` object.', function(done) {
+    it('`found` and `notfound` properties values should be an `Array` object.', function (done) {
       var $sb = $('#sortlist').sortboard({
-        filterComplete: function(data) {
+        filterComplete: function (data) {
           expect(data).to.have.property('found').that.is.an('array');
           expect(data).to.have.property('notfound').that.is.an('array');
           done();
