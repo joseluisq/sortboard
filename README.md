@@ -1,4 +1,4 @@
-# Sortboard [![](https://img.shields.io/npm/v/sortboard.svg?style=flat-square)](https://github.com/joseluisq/sortboardjs) [![Build Status](http://img.shields.io/travis/joseluisq/sortboardjs.svg?style=flat-square)](https://travis-ci.org/joseluisq/sortboardjs)
+# Sortboard [![](https://img.shields.io/bower/v/sortboard.svg?style=flat-square)](https://github.com/quintana-dev/sortboard#install) [![](https://img.shields.io/npm/v/sortboard.svg?style=flat-square)](https://github.com/quintana-dev/sortboard) [![Build Status](http://img.shields.io/travis/quintana-dev/sortboard.svg?style=flat-square)](https://travis-ci.org/quintana-dev/sortboard)
 
 > Easy sorting and filtering of elements.
 
