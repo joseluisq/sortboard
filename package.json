@@ -1,7 +1,7 @@
 {
   "name": "sortboard",
   "author": "Jose Luis Quintana (https://github.com/joseluisq)",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Easy sorting and filtering of elements.",
   "main": "src/sortboard.js",
   "keywords": [
