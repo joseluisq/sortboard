@@ -1,9 +1,7 @@
-/*
- * Sortboard v1.0.3
- * Release: 02/04/2015
- * Author: Jose Luis Quintana <joseluisquintana20@gmail.com>
- * https://github.com/joseluisq/sortboardjs
- * MIT Licence
+/**
+ * Sortboard v1.0.4
+ * MIT | http://git.io/sortboard
+ * (c) 2015 José Luis Quintana
  */
 
 (function () {
@@ -138,7 +136,7 @@
   };
 
   Sortboard.prototype.filterBy = function (filter) {
-    if (this.currentFilter !== filter) {
+    if (filter && ((this.currentFilter !== filter) || filter === 'all')) {
       var i, attr, match, cords, regx, item, itemList, matches = [];
 
       regx = new RegExp(filter, 'i');
@@ -153,10 +151,6 @@
         }
       }
 
-      if (!matches.length && filter !== 'all') {
-        return;
-      }
-
       this.currentFilter = filter;
       this.found = [];
       this.notfound = [];
@@ -165,7 +159,7 @@
         item = itemList[i];
         cords = item.getAttribute('data-cords');
 
-        if (filter === 'all') {
+        if (filter.toString().toLowerCase() === 'all') {
           this.found.push(item);
           this.translate(item, cords, false);
         } else {
@@ -181,14 +175,13 @@
           this.translate(item, cords, !match);
         }
       }
+    }
 
-      if (this.options.filterComplete && typeof this.options.filterComplete === 'function') {
-        this.options.filterComplete({
-          found: this.found || [],
-          notfound: this.notfound || []
-        });
-      }
+    if (this.options.filterComplete && typeof this.options.filterComplete === 'function') {
+      this.options.filterComplete(this.found || []);
+    }
 
+    if (this.found.length > 0) {
       this.sort();
     }
   };

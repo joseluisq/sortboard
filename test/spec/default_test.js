@@ -48,8 +48,7 @@ describe('Sortboard', function () {
     it('param value `data` should have `found` and `notfound` properties.', function (done) {
       var sb = new Sortboard(sortlist, {
         filterComplete: function (data) {
-          expect(data).to.have.property('found');
-          expect(data).to.have.property('notfound');
+          expect(data).that.is.an('array');
           done();
         }
       });
@@ -57,11 +56,10 @@ describe('Sortboard', function () {
       sb.filterBy('first-line');
     });
 
-    it('`found` and `notfound` properties values should be an `Array` object.', function (done) {
+    it('`data`parameter in filterComplete() should be an Array.', function (done) {
       var sb = new Sortboard(sortlist, {
         filterComplete: function (data) {
-          expect(data).to.have.property('found').that.is.an('array');
-          expect(data).to.have.property('notfound').that.is.an('array');
+          expect(data).that.is.an('array');
           done();
         }
       });
