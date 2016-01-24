@@ -188,7 +188,7 @@
 
   </div>
 
-  <script src="../src/sortboard.js"></script>
+  <script src="/src/sortboard.js"></script>
   <script>
     (function() {
       'use strict';
@@ -197,7 +197,7 @@
 
       // Initializing the board.
       var sortlist = document.getElementById('sortlist');
-      var sb = new Sortboard(sortlist, {
+      var sb = Sortboard.create(sortlist, {
         gutter: 10,
         filterComplete: function(e) {
           console.log(e);

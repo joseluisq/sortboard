@@ -1,268 +1,279 @@
-/**
- * Sortboard v1.0.4
- * MIT | http://git.io/sortboard
- * (c) 2015 José Luis Quintana
- */
+(() => {
+  /**
+   * Sortboard v1.0.5 | MIT
+   * http://git.io/sortboard
+   * (c) 2016 José Luis Quintana
+   */
+  const SortboardBase = {
+    /**
+    * Initialize
+    *
+    * @param {Element} element
+    * @param {Object} options
+    */
+    init: function(el, opts) {
+      this.currentFilter = 'all';
+      this.elements = [];
+      this.found = [];
+      this.element = null;
+      this.notfound = [];
+      this.size = 0;
+      this.defaults = {
+        gutter: 0,
+        hiddenClass: '.hidden',
+        itemsMatchName: 'li',
+        filterComplete: null,
+        sortComplete: null
+      };
 
-(function () {
-  'use strict';
+      if (typeof el === 'object') {
+        if (el.nodeName) {
+          this.element = el;
+          this.setOptions(opts);
+          this.addEvents();
+        } else {
+          this.setOptions(opts);
+        }
+      } else {
+        console.error('Sortboard requires an HTML element.');
+      }
+    },
 
-  if (window.Sortboard) {
-    return;
-  }
+    /**
+     * Set options
+     * @param  {Object} opts
+     */
+    setOptions: function(opts) {
+      this.options = Object.assign(this.defaults, opts);
+    },
+
+    addEvents: function() {
+      window.addEventListener('resize', () => this.sort(), false);
+      this.sort();
+    },
+
+    /**
+     * Sort elements
+     */
+    sort: function() {
+      let n = 0;
+      let x = 0;
+      let y = 0;
+      let totalW = 0;
+      let totalH = 0;
+      let breakW = 0;
+      const parentWidth = this.element.parentElement.offsetWidth;
+      const children = this.findElements(this.options.itemsMatchName);
+      const size = children.length;
+      const gutter = this.options.gutter;
+      const str = `(${this.options.hiddenClass.replace('.', '')})+`;
+      const regx = new RegExp(str, 'i');
+
+      let child;
+      for (let i = 0; i < size; ++i) {
+        child = children[i];
+
+        if (!child.className.match(regx)) {
+          if (totalW >= (parentWidth - child.offsetHeight - gutter)) {
+            totalW = 0;
+            y += child.offsetHeight + gutter;
+
+            if (!breakW) {
+              breakW = n * child.offsetWidth + ((n * gutter) - gutter);
+            }
+          } else {
+            totalW += n ? gutter : 0;
+          }
+
+          totalW += child.offsetWidth;
+          x = totalW - child.offsetWidth;
+          totalH = y + child.offsetHeight;
+          n++;
+
+          child.setAttribute('data-cords', `${x},${y}`);
+          this.translate(child, `${x},${y}`, false);
+        }
+      }
+
+      const pNWidth = (n * parentWidth) + ((n < 2 ? n : n - 1) * gutter);
+      const pWidth = breakW || pNWidth;
+
+      this.element.style.width = `${pWidth}px`;
+      this.element.style.height = `${totalH}px`;
+      this.size = size;
+
+      if (this.options.sortComplete && typeof this.options.sortComplete === 'function') {
+        this.options.sortComplete();
+      }
+    },
+
+    /**
+     * Filter by string
+     * @param  {String} filter
+     */
+    filterBy: function(filter) {
+      filter = filter.toString();
+
+      if (filter && ((this.currentFilter !== filter) || filter === 'all')) {
+        let i;
+        let match;
+        let cords;
+        let regx;
+        let attr;
+        let item;
+        const matches = [];
+        let items = this.findElements(this.options.itemsMatchName);
+        regx = new RegExp(filter, 'i');
+
+        for (i = 0; i < this.size; ++i) {
+          item = items[i];
+          attr = item.getAttribute('data-filter');
+
+          if (attr && attr.search(regx) !== -1) {
+            matches.push(item);
+          }
+        }
+
+        this.currentFilter = filter;
+        this.found = [];
+        this.notfound = [];
+
+        for (i = 0; i < this.size; ++i) {
+          item = items[i];
+          cords = item.getAttribute('data-cords');
+
+          if (filter.toLowerCase() === 'all') {
+            this.found.push(item);
+            this.translate(item, cords, false);
+          } else {
+            attr = item.getAttribute('data-filter');
+            match = (attr && attr.search(regx) !== -1);
+
+            if (match) {
+              this.found.push(item);
+            } else {
+              this.notfound.push(item);
+            }
+
+            this.translate(item, cords, !match);
+          }
+        }
+      }
+
+      if (this.options.filterComplete && typeof this.options.filterComplete === 'function') {
+        this.options.filterComplete(this.found || []);
+      }
+
+      if (this.found.length > 0) {
+        this.sort();
+      }
+    },
+
+    /**
+     * Translate one element to specific cords.
+     * @param  {HTMLElement} item
+     * @param  {String} cords "x,y" cords
+     * @param  {Boolean} hide True for show or False for hide
+     */
+    translate: function(item, cords, hide) {
+      const hiddenClass = this.options.hiddenClass.replace('.', '');
+      const matrix = `matrix(1,0,0,1,${cords}) scale(${hide ? '0.001' : '1'})`;
+
+      item.className = item.className.replace(new RegExp(hiddenClass, 'g'), '');
+
+      if (hide) {
+        item.className = `${item.className} ${hiddenClass}`;
+      }
+
+      item.style.setProperty('opacity', hide ? '0' : '1');
+      item.style.setProperty('-webkit-transform', matrix);
+      item.style.setProperty('-moz-transform', matrix);
+      item.style.setProperty('transform', matrix);
+    },
+
+    /**
+     * Get children elements by children name
+     * @param  {String} childrenName Children name
+     * @return {Array}              An Array with HTMLElements
+     */
+    findElements: function(childrenName) {
+      if (!this.elements.length) {
+        this.elements = childrenName.match(/^\.(.+)$/) ? this.element.getElementsByClassName(childrenName.replace('.', '')) : this.element.getElementsByTagName(childrenName);
+      }
+
+      return this.elements;
+    }
+  };
 
   /**
-   * Initialize Sortboard
-   *
-   * @param {Element} element
-   * @param {Object} options
-   * @access public
+   * Sortboard API function
+   * @return {Object} Object API
    */
-  function Sortboard (element, options) {
-    if (!(this instanceof Sortboard)) {
-      return new Sortboard(element, options);
-    }
+  const SortboardAPI = {
+    /**
+     * Factory function
+     * @param {HTMLElement} element
+     * @param {Object} options
+     * @return {Object} Sortboard Object
+     */
+    create: function(element, options) {
+      const sb = Object.create(SortboardBase);
+      sb.init(element, options);
 
-    this.currentFilter = 'all';
-    this.elements = [];
-    this.found = [];
-    this.notfound = [];
-
-    this.options = {
-      gutter: 0,
-      hiddenClass: '.hidden',
-      itemsMatchName: 'li',
-      filterComplete: null,
-      sortComplete: null
-    };
-
-    if (typeof element === 'object') {
-      if (element.nodeName) {
-        this.setElement(element);
-        this.setOptions(options);
-        this.addEvents();
-      } else {
-        this.setOptions(options);
-      }
-    } else {
-      this.error('Sortboard requires an HTML element.');
-    }
-  }
-
-  Sortboard.prototype.setOptions = function (options) {
-    this.options = this.merge(this.options, options);
-  };
-
-  Sortboard.prototype.merge = function (a, b) {
-    var i;
-
-    if (b) {
-      for (i in b) {
-        a[i] = b[i];
-      }
-    }
-
-    return a;
-  };
-
-  Sortboard.prototype.addEvents = function () {
-    var that = this;
-
-    window.addEventListener('resize', function () {
-      that.sort();
-    }, false);
-
-    that.sort();
-  };
-
-  Sortboard.prototype.setElement = function (element) {
-    this.element = element;
-  };
-
-  Sortboard.prototype.sort = function () {
-    var item, gutter, itemList,
-      i = 0,
-      n = 0,
-      w = 0,
-      h = 0,
-      sw = 0,
-      tw = 0,
-      th = 0,
-      rtw = 0,
-      cth = 0,
-      ctw = 0;
-
-    sw = this.element.parentElement.offsetWidth;
-    gutter = this.options.gutter;
-    itemList = this.getElements(this.options.itemsMatchName);
-
-    this.size = itemList.length;
-    var regx = new RegExp('(' + this.options.hiddenClass.replace('.', '') + ')+', 'i');
-
-    for (i = 0; i < this.size; ++i) {
-      item = itemList[i];
-
-      if (!item.className.match(regx)) {
-        w = item.offsetWidth;
-        h = item.offsetHeight;
-
-        if (tw >= (sw - h - gutter)) {
-          tw = 0;
-          th += h + gutter;
-
-          if (!ctw) {
-            ctw = n * w + ((n * gutter) - gutter);
-          }
-        } else {
-          tw += n ? gutter : 0;
+      return {
+        filterBy: function(filter) {
+          sb.filterBy(filter);
+        },
+        sort: function() {
+          sb.sort();
+        },
+        getFilter: function() {
+          return sb.currentFilter;
+        },
+        getItems: function() {
+          return sb.elements;
+        },
+        getFoundItems: function() {
+          return sb.found;
+        },
+        getNotFoundItems: function() {
+          return sb.notfound;
         }
-
-        tw += w;
-        rtw = tw - w;
-        cth = th + h;
-        n++;
-
-        item.setAttribute('data-cords', rtw + ',' + th);
-        this.translate(item, rtw + ',' + th, false);
-      }
-    }
-
-    this.element.style.width = (ctw ? ctw : (n * w) + (((n < 2 ? n : n - 1)) * gutter)).toString() + 'px';
-    this.element.style.height = cth.toString() + 'px';
-
-    if (this.options.sortComplete && typeof this.options.sortComplete === 'function') {
-      this.options.sortComplete();
+      };
     }
   };
 
-  Sortboard.prototype.filterBy = function (filter) {
-    if (filter && ((this.currentFilter !== filter) || filter === 'all')) {
-      var i, attr, match, cords, regx, item, itemList, matches = [];
+  /* istanbul ignore else */
+  if (typeof module === 'object' && typeof module.exports === 'object') {
+    module.exports = SortboardAPI;
+  /* istanbul ignore else */
+  } else if (typeof define === 'function' && define.amd) {
+    define([], () => SortboardAPI);
+  } else {
+    window.Sortboard = SortboardAPI;
 
-      regx = new RegExp(filter, 'i');
-      itemList = this.getElements(this.options.itemsMatchName);
+    // jQuery support
+    if (window.jQuery) {
+      let sb;
+      let fn;
 
-      for (i = 0; i < this.size; ++i) {
-        item = itemList[i];
-        attr = item.getAttribute('data-filter');
+      window.jQuery.fn.sortboard = function(options) {
+        if (typeof options === 'string') {
+          sb = this.data('sortboard');
+          fn = sb[options];
 
-        if (attr && attr.search(regx) !== -1) {
-          matches.push(item);
-        }
-      }
-
-      this.currentFilter = filter;
-      this.found = [];
-      this.notfound = [];
-
-      for (i = 0; i < this.size; ++i) {
-        item = itemList[i];
-        cords = item.getAttribute('data-cords');
-
-        if (filter.toString().toLowerCase() === 'all') {
-          this.found.push(item);
-          this.translate(item, cords, false);
-        } else {
-          attr = item.getAttribute('data-filter');
-          match = (attr && attr.search(regx) !== -1);
-
-          if (match) {
-            this.found.push(item);
+          if (sb && typeof options === 'string' && fn) {
+            return fn.apply(this, Array.prototype.slice.call(arguments, 1));
           } else {
-            this.notfound.push(item);
+            window.jQuery.error(`Method ${options} is not supported on jQuery.sortboard.`);
           }
-
-          this.translate(item, cords, !match);
-        }
-      }
-    }
-
-    if (this.options.filterComplete && typeof this.options.filterComplete === 'function') {
-      this.options.filterComplete(this.found || []);
-    }
-
-    if (this.found.length > 0) {
-      this.sort();
-    }
-  };
-
-  Sortboard.prototype.translate = function (item, cords, hide) {
-    var hiddenClass = this.options.hiddenClass.replace('.', '');
-    var matrix = 'matrix(1,0,0,1,' + cords + ') scale(' + (hide ? '0.001' : '1') + ')';
-
-    item.className = item.className.replace(new RegExp(hiddenClass, 'g'), '');
-
-    if (hide) {
-      item.className = item.className + ' ' + hiddenClass;
-    }
-
-    item.style.setProperty('opacity', hide ? '0' : '1');
-    item.style.setProperty('-webkit-transform', matrix);
-    item.style.setProperty('-moz-transform', matrix);
-    item.style.setProperty('transform', matrix);
-  };
-
-  Sortboard.prototype.getElements = function (childrenName) {
-    if (!this.elements.length) {
-      this.elements = childrenName.match(/^\.(.+)$/) ? this.element.getElementsByClassName(childrenName.replace('.', '')) : this.element.getElementsByTagName(childrenName);
-    }
-
-    return this.elements;
-  };
-
-  Sortboard.prototype.error = function (str) {
-    if (window.console) {
-      window.console.error(str);
-    }
-  };
-
-  function SortboardFactory (sortboard) {
-    return {
-      filterBy: function (filter) {
-        sortboard.filterBy(filter);
-      },
-      sort: function () {
-        sortboard.sort();
-      },
-      getFilter: function () {
-        return sortboard.currentFilter;
-      },
-      getItems: function () {
-        return sortboard.elements;
-      },
-      getFoundItems: function () {
-        return sortboard.found;
-      },
-      getNotFoundItems: function () {
-        return sortboard.notfound;
-      }
-    };
-  }
-
-  window.Sortboard = function (element, options) {
-    return new SortboardFactory(new Sortboard(element, options));
-  };
-
-  // jQuery support
-  if (window.jQuery) {
-    var sb, fn;
-
-    window.jQuery.fn.sortboard = function (options) {
-      if (typeof options === 'string') {
-        sb = this.data('sortboard');
-        fn = sb[options];
-
-        if (sb && typeof options === 'string' && fn) {
-          return fn.apply(this, Array.prototype.slice.call(arguments, 1));
         } else {
-          window.jQuery.error('Method ' + options + ' is not supported on jQuery.sortboard.');
+          sb = SortboardAPI.create(this[0], options);
+          this.data('sortboard', sb);
         }
-      } else {
-        sb = new SortboardFactory(new Sortboard(this[0], options));
-        this.data('sortboard', sb);
-      }
 
-      return this;
-    };
+        return this;
+      };
+    }
   }
 })();
