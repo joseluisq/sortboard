@@ -25,7 +25,7 @@
     "José Luis Quintana <http://git.io/joseluisq>"
   ],
   "devDependencies": {
-    "babel-cli": "^6.4.0",
+    "babel-cli": "*",
     "babel-core": "*",
     "babel-preset-es2015": "*",
     "banr": "*",
@@ -40,12 +40,12 @@
     "xo": "*"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=4"
   },
   "scripts": {
     "serve": "`npm bin`/gulp serve",
     "build": "`npm bin`/gulp build",
-    "test": "babel-node test/test.js"
+    "test": "npm run build && babel-node test/test.js"
   },
   "babel": {
     "presets": [
