@@ -30,7 +30,7 @@ Define a list, for example, using an `ul` and `li` tags, then sets your filters 
 ```js
 var sortlist = document.getElementById('sortlist');
 
-var sb = new Sortboard(sortlist, {
+var sb = Sortboard.create(sortlist, {
   gutter: 10,
   filterComplete: function(matches) {
     // `matches` always should an Array[] with `HTML Elements` matched.
@@ -77,7 +77,9 @@ $('#sortlist').sortboard('filterBy', 'programing');
 </ul>
 ```
 
-## Reference
+## API
+`Sortboard.create(element, options)`
+
 **Options :**
 
   * `gutter` : The margin for items defined in pixels.
@@ -95,8 +97,10 @@ $('#sortlist').sortboard('filterBy', 'programing');
   * `getFoundItems()` : Gets items matched by filter.
   * `getNotFoundItems()` : Gets items non-matched by filter.
 
+## Contributions
+[Pull requests](https://github.com/quintana-dev/sortboard/pulls) and [issues](https://github.com/quintana-dev/sortboard/issues) are welcome. Please before sending some feature or bug request make sure provide as much detail and context as possible.
 
 ## License
 MIT license
 
-© 2015 [José Luis Quintana](http://quintana.io)
+© 2016 [José Luis Quintana](http://git.io/joseluisq)

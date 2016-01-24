@@ -1,7 +1,7 @@
 {
   "name": "sortboard",
   "description": "Easy sorting and filtering of elements.",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "src/sortboard.js",
   "license": "MIT",
   "repository": {
