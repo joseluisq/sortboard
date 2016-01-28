@@ -21,6 +21,13 @@ $ npm install sortboard
 $ bower install sortboard
 ```
 
+**CDN** - Hosted by [jsDelivr](https://www.jsdelivr.com/)
+
+```html
+<!-- Latest compiled and minified sortboard.js -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/sortboard/latest/sortboard.min.js">
+```
+
 ## Usage
 
 Define a list, for example, using an `ul` and `li` tags, then sets your filters in each `li` tags with the `data-filter` attribute, it can add several filters for one item separated by whitespace.
