@@ -110,4 +110,4 @@ $('#sortlist').sortboard('filterBy', 'programing');
 ## License
 MIT license
 
-© 2015 2016 [José Luis Quintana](http://git.io/joseluisq)
+© 2016 [José Luis Quintana](http://git.io/joseluisq)
