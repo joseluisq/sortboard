@@ -1,7 +1,6 @@
 # Sortboard
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/joseluisq/sortboard.svg)](https://greenkeeper.io/)
-[![Build Status](https://travis-ci.org/joseluisq/sortboard.svg?branch=master)](https://travis-ci.org/joseluisq/sortboard) [![Coverage Status](https://coveralls.io/repos/github/joseluisq/sortboard/badge.svg?branch=master)](https://coveralls.io/github/joseluisq/sortboard?branch=master) [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+[![Build Status](https://travis-ci.org/joseluisq/sortboard.svg?branch=master)](https://travis-ci.org/joseluisq/sortboard) [![Coverage Status](https://coveralls.io/repos/github/joseluisq/sortboard/badge.svg?branch=master)](https://coveralls.io/github/joseluisq/sortboard?branch=master) [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/) [![Greenkeeper badge](https://badges.greenkeeper.io/joseluisq/sortboard.svg)](https://greenkeeper.io/)
 
 > An ES6 small library for easy sorting and filtering of elements.
 
