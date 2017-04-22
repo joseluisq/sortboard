@@ -23,3 +23,5 @@ cache:
 
 notifications:
   email: false
+
+after_success: yarn coverage
