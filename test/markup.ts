@@ -1,4 +1,4 @@
-module.exports.init = () => {
+export default function init () {
   const tmpl = `
     <ul id="sortlist">
       <li data-filter="black second-line infantry-black">&#9823;</li>

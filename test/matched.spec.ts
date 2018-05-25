@@ -1,11 +1,11 @@
 import markup from './markup'
-import { sortboard, Sortboard, Listener } from '../src'
+import { sortboard, Sortboard } from '../src'
 
-markup.init()
+markup()
 
 describe('Sortboard', () => {
-  let sb: Sortboard
-  const filterValue = 'black first-line'
+  let sb: Sortboard | null = null
+  const filterValue: string = 'black first-line'
 
   beforeEach(() => {
     sb = sortboard({
@@ -21,5 +21,7 @@ describe('Sortboard', () => {
     })
   })
 
-  sb.filter(filterValue)
+  if (sb) {
+    sb!.filter(filterValue)
+  }
 })

@@ -38,7 +38,7 @@
     "minify:browser": "uglifyjs ${npm_package_name}.umd.js -cm --source-map -o ${npm_package_name}.umd.min.js",
     "watch": "tsc --watch",
     "clean": "rm -rf dist",
-    "test": "npm run lint && karma start --single-run --reporters spec",
+    "test": "npm run lint && karma start karma.config.js --single-run --reporters spec",
     "test:watch": "karma start",
     "lint": "tslint --format stylish --project tsconfig.json"
   },
@@ -56,7 +56,7 @@
     "karma-typescript": "^3.0.12",
     "rollup": "^0.59.3",
     "rollup-plugin-typescript2": "^0.14.0",
-    "tslint": "^5.9.1",
+    "tslint": "^5.10.0",
     "tslint-config-standard-plus": "^1.0.0",
     "typescript": "^2.8.3",
     "uglify-js": "^3.3.23"
