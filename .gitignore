@@ -1,13 +1,12 @@
 node_modules
+coverage
 dist
 lib
-coverage
 *.log
 **/.DS_Store
-*.~
-/*.js
-/*.map
-/*.d.ts
 .cache
+*.js
+*.map
+*.d.ts
 .*_cache
 !/*.config.js

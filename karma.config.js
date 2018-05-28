@@ -13,30 +13,33 @@ module.exports = function (config) {
     frameworks: ['jasmine', 'karma-typescript'],
     plugins: [
       'karma-jasmine',
-      'karma-typescript',
       'karma-chrome-launcher',
-      'karma-jasmine-html-reporter',
-      'karma-spec-reporter'
+      'karma-spec-reporter',
+      'karma-typescript'
     ],
+    karmaTypescriptConfig: {
+      tsconfig: "./tsconfig.json",
+    },
     client: {
-      clearContext: false // leave Jasmine Spec Runner output visible in browser
+      // leave Jasmine Spec Runner output visible in browser
+      clearContext: false
     },
     files: [
       { pattern: 'src/**/*.ts' },
-      { pattern: 'test/**/*.spec.ts' }
+      { pattern: 'test/**/*.ts' }
     ],
     preprocessors: {
       'src/**/*.ts': ['karma-typescript'],
-      'test/**/*.spec.ts': ['karma-typescript']
+      'test/**/*.ts': ['karma-typescript']
     },
     karmaTypescriptConfig: {
       tsconfig: "./tsconfig.json"
     },
-    reporters: ['progress', 'kjhtml'],
+    reporters: ['spec', 'karma-typescript'],
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: localBrowsers,
-    singleRun: false
+    singleRun: true
   })
 }

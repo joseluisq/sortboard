@@ -21,7 +21,7 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "module": "ES2015",
+    "module": "commonjs",
     "target": "es5",
     "typeRoots": [
       "node_modules/@types"
