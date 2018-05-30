@@ -24,7 +24,7 @@ npm install sortboard --save-dev
 The [UMD](https://github.com/umdjs/umd) build is also available on [unpkg](https://unpkg.com).
 
 ```html
-<script src="https://unpkg.com/sortboard/dist/sortboard.min.js"></script>
+<script src="https://unpkg.com/sortboard/src/sortboard.umd.min.js"></script>
 ```
 
 You can use the library via `window.sortboard`
@@ -33,9 +33,9 @@ You can use the library via `window.sortboard`
 
 Define some list. For example an `ul` with `li` child elements, then set your filters in each `li` element with the `data-filter` attribute. It can add several filters by element separated by whitespace.
 
-__Js:__
+__Typescript:__
 
-```js
+```ts
 import { sortboard, Sortboard, Listener } from 'sortboard'
 
 const sb = sortboard({
@@ -48,8 +48,8 @@ sb.on('filter', onEvent)
 
 sb.filter('programing front-end')
 
-// Or filter using a RegEx string
-sb.filter('(webdesign|illustration)')
+// Or filter using a RegEx
+sb.filter(/(webdesign|illustration)/)
 ```
 
 __Markup:__

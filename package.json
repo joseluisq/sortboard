@@ -36,7 +36,7 @@
     "compile:es": "tsc --outDir .cache --module es2015 --target es5",
     "compile:cjs": "tsc --outDir ./ --module commonjs --target es5",
     "compile:browser": "rollup -c && npm run minify:browser",
-    "minify:browser": "uglifyjs ${npm_package_name}.umd.js -cm --source-map -o ${npm_package_name}.umd.min.js",
+    "minify:browser": "uglifyjs src/${npm_package_name}.umd.js -cm --source-map -o src/${npm_package_name}.umd.min.js",
     "watch": "tsc --watch",
     "clean": "rm -rf dist",
     "test": "npm run lint && karma start karma.config.js",
