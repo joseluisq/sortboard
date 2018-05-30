@@ -1,15 +1,16 @@
 {
   "compileOnSave": false,
   "include": [
-    "src",
-    "test"
+    "src/*.ts",
+    "test/*.ts"
   ],
   "exclude": [
+    "*.d.ts",
     "dist",
     "node_modules"
   ],
   "compilerOptions": {
-    "outDir": "./",
+    "outDir": "../",
     "sourceMap": true,
     "declaration": true,
     "noImplicitAny": true,

@@ -1,10 +1,10 @@
 {
   "name": "sortboard",
   "version": "2.0.0",
-  "description": "Easy sorting and filtering of elements.",
+  "description": "An small library for easy sorting and filtering of elements.",
   "repository": "joseluisq/sortboard",
   "license": "MIT",
-  "main": "dist/sortboard.js",
+  "main": "src/sortboard.js",
   "author": {
     "name": "José Luis Quintana",
     "url": "http://git.io/joseluisq"

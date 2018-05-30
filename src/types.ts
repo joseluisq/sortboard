@@ -1,7 +1,7 @@
 import { EmitusListener as Listener } from 'emitus'
 
 // Events
-export type Event = 'filter' | 'next' | 'prev' | 'play' | 'pause'
+export type Event = 'filter' | 'sort'
 
 export interface Options {
   container: HTMLElement | string

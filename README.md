@@ -1,8 +1,7 @@
 # Sortboard
 
-[![Build Status](https://travis-ci.org/joseluisq/sortboard.svg?branch=master)](https://travis-ci.org/joseluisq/sortboard) [![Coverage Status](https://coveralls.io/repos/github/joseluisq/sortboard/badge.svg?branch=master)](https://coveralls.io/github/joseluisq/sortboard?branch=master) [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/) [![Greenkeeper badge](https://badges.greenkeeper.io/joseluisq/sortboard.svg)](https://greenkeeper.io/)
-
-> An ES6 small library for easy sorting and filtering of elements.
+[![Build Status](https://travis-ci.org/joseluisq/sortboard.svg?branch=master)](https://travis-ci.org/joseluisq/sortboard) [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+> An small library for easy sorting and filtering of elements.
 
 Sortboard is small library for sorting and filtering HTML elements which uses CSS3 [`matrix()` and `scale()`](http://www.w3.org/TR/2011/WD-css3-2d-transforms-20111215/) transform functions. It supports [RegEx](https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions) string filters and it's responsive by default.
 
@@ -37,12 +36,15 @@ Define some list. For example an `ul` with `li` child elements, then set your fi
 __Js:__
 
 ```js
-import sortboard from 'sortboard'
+import { sortboard, Sortboard, Listener } from 'sortboard'
 
 const sb = sortboard({
   container: '#mylist',
   selector: 'li'
 })
+
+const onEvent: Listener = () => console.log('ok!')
+sb.on('filter', onEvent)
 
 sb.filter('programing front-end')
 
@@ -76,10 +78,9 @@ __Markup:__
 
 ### Methods
 
-- __filter( string )__ : `string` it's text to filter, it should match to `data-filter` attribute for each element to searching. It support also a `RegExp` string.
+- __filter( string | RegExp )__ : `It's string or `RegExp` regular expresion pattern to filter. Which should match to `data-filter` attribute for each element to searching.
 - __reset()__ : Reset the elements which uses `resetFilterValue` option for resetting.
 - __sort()__ : Sort the element positions in the container. Sort method is called after the `filter()` method and in each trigger of `window.resize` event.
-- __elements()__ : Return an array with all items.
 
 ### Events
 
@@ -92,14 +93,14 @@ Passed params:
 - __filterValue:__ A `string` with the current filter value used.
 
 ```js
-sortboard.on('filter', (matchedElements, restElements, filterValue) => {})
+sb.on('filter', (matchedElements, restElements, filterValue) => {})
 ```
 
 #### sort
 Trigger when sort is completed.
 
 ```js
-sortboard.on('sort', () => {})
+sb.on('sort', () => {})
 ```
 
 ## Development

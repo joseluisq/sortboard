@@ -26,22 +26,17 @@ export default function sortboard (options?: Options): Sortboard | null {
     container = opts.container
   }
 
-  const selectorContainer: string = opts.selector.substr(0, opts.selector.search(' '))
-  const blocksContainer: HTMLElement | null = child(container, selectorContainer)
-
   let api: Sortboard | null = null
 
-  if (blocksContainer) {
-    const blocks: HTMLElement[] = children(opts.selector, blocksContainer)
+  const blocks: HTMLElement[] = children(opts.selector, container)
 
-    if (!blocks.length) {
-      return null
-    }
-
-    const els: Elements = { container, blocks }
-
-    api = createSortboard(els, opts)
+  if (!blocks.length) {
+    return null
   }
+
+  const els: Elements = { container, blocks }
+
+  api = createSortboard(els, opts)
 
   return api
 }
@@ -49,7 +44,7 @@ export default function sortboard (options?: Options): Sortboard | null {
 export { sortboard, Sortboard, Elements, Options, Listener, Event, Emitus }
 
 function createSortboard ({ container, blocks }: Elements, opts: Options): Sortboard {
-  let currentFilter: string = ''
+  let currentFilter: string | RegExp = ''
 
   const api: Sortboard = {
     // Methods
@@ -71,12 +66,11 @@ function createSortboard ({ container, blocks }: Elements, opts: Options): Sortb
     sort()
   }
 
-  function filter (pattern: string = ''): void {
+  function filter (pattern: string | RegExp = ''): void {
     if (!pattern || pattern === currentFilter) return
 
     currentFilter = pattern
 
-    const regPattern = new RegExp(pattern, 'i')
     const notMatchedElements: HTMLElement[] = []
     const matchedElements: HTMLElement[] = blocks.filter((item: any) => {
       const cords: string = item.getAttribute('data-cords').trim()
@@ -87,15 +81,16 @@ function createSortboard ({ container, blocks }: Elements, opts: Options): Sortb
       }
 
       const data: string = item.getAttribute('data-filter').trim()
-      const ok: boolean = !!data && regPattern.test(data)
+      const regx: RegExp = pattern instanceof RegExp ? pattern : RegExp(pattern.toString())
+      const matchPattern: boolean = !!data && RegExp(regx, 'i').test(data)
 
-      if (!ok) {
+      if (!matchPattern) {
         notMatchedElements.push(item)
       }
 
-      translate(item, cords, !ok)
+      translate(item, cords, !matchPattern)
 
-      return ok
+      return matchPattern
     })
 
     emitter.emit('filter', [ matchedElements, notMatchedElements, currentFilter ])
