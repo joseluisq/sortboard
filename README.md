@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/joseluisq/sortboard.svg?branch=master)](https://travis-ci.org/joseluisq/sortboard) [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 > An small library for easy sorting and filtering of elements.
 
-Sortboard is small library for sorting and filtering HTML elements which uses CSS3 [`matrix()` and `scale()`](http://www.w3.org/TR/2011/WD-css3-2d-transforms-20111215/) transform functions. It supports [RegEx](https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions) string filters and it's responsive by default.
+Sortboard is small library for sorting and filtering HTML elements which uses CSS3 [`matrix()` and `scale()`](http://www.w3.org/TR/2011/WD-css3-2d-transforms-20111215/) transform functions. It supports [RegEx](https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions) filters and it's responsive by default.
 
 :tada: View demo on [Codepen](http://codepen.io/joseluisq/full/IlHzo/)
 
