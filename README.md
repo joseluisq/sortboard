@@ -78,7 +78,7 @@ __Markup:__
 
 ### Methods
 
-- __filter( string | RegExp )__ : `It's string or `RegExp` regular expresion pattern to filter. Which should match to `data-filter` attribute for each element to searching.
+- __filter( string | RegExp )__ : It's string or `RegExp` regular expresion pattern to filter. Which should match to `data-filter` attribute for each element to searching.
 - __reset()__ : Reset the elements which uses `resetFilterValue` option for resetting.
 - __sort()__ : Sort the element positions in the container. Sort method is called after the `filter()` method and in each trigger of `window.resize` event.
 
@@ -111,7 +111,7 @@ yarn start
 
 ## Contributions
 
-[Pull requests](https://github.com/joseluisq/sortboard/pulls) and [issues](https://github.com/joseluisq/sortboard/issues) are very appreciated.
+Feel free to send some [pull request](https://github.com/joseluisq/sortboard/pulls) or [issue](https://github.com/joseluisq/sortboard/issues).
 
 ## License
 MIT license
