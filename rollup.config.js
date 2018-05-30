@@ -6,7 +6,7 @@ export default {
   input: '.cache/src/index.js',
   output: {
     name,
-    file: `./${name}.umd.js`,
+    file: `./src/${name}.umd.js`,
     format: 'umd',
     sourcemap: true,
     exports: 'named'
