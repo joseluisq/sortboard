@@ -1,6 +1,6 @@
 {
   "name": "sortboard",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "An small library for easy sorting and filtering of elements.",
   "repository": "joseluisq/sortboard",
   "license": "MIT",
