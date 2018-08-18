@@ -1,23 +1,26 @@
-import { name } from "./package.json";
+import { name } from './package.json'
 import commonjs from 'rollup-plugin-commonjs'
 import resolve from 'rollup-plugin-node-resolve'
+import typescript from 'rollup-plugin-typescript2'
+import { terser } from 'rollup-plugin-terser'
 
 export default {
-  input: '.cache/src/index.js',
+  input: 'src/index.ts',
+  name,
   output: {
-    name,
-    file: `./src/${name}.umd.js`,
+    file: `./dist/${name}.umd.min.js`,
     format: 'umd',
-    sourcemap: true,
+    sourcemap: false,
     exports: 'named'
   },
   plugins: [
+    typescript(),
     resolve(),
     commonjs({
-      namedExports: {
-        'node_modules/emitus/dist/emitus.umd.js': ['emitus']
-      }
-    })
+      sourceMap: false,
+      include: 'node_modules/emitus/index.js'
+    }),
+    terser()
   ],
   onwarn
 }

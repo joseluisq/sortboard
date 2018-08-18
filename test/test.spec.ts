@@ -1,5 +1,5 @@
 import markup from './markup'
-import { sortboard, Sortboard, Listener } from '../src'
+import { Listener, sortboard, Sortboard } from '../src'
 
 markup()
 

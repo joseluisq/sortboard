@@ -116,4 +116,4 @@ Feel free to send some [pull request](https://github.com/joseluisq/sortboard/pul
 ## License
 MIT license
 
-© 2017 [José Luis Quintana](http://git.io/joseluisq)
+© 2014-present [José Luis Quintana](http://git.io/joseluisq)

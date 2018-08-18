@@ -1,7 +1,15 @@
-import { child, children, onResize } from './utils'
-import { Options, Sortboard, Event, Elements } from './types'
-import { defaults } from './defaults'
+import { child, children } from './utils'
+import { Elements, Event, Options, Sortboard } from './types'
 import { emitus, Emitus, EmitusListener as Listener } from 'emitus'
+
+export const defaults: Options = {
+  container: '.sortboard',
+  selector: '.sortboard-block',
+  gutter: 0,
+  resetFilterValue: 'all',
+  hiddenClass: '.sortboard-hidden',
+  matchedClass: '.sortboard-matched'
+}
 
 const emitter: Emitus = emitus()
 
@@ -105,12 +113,12 @@ function createSortboard ({ container, blocks }: Elements, opts: Options): Sortb
   }
 
   function sort (): void {
-    let n: number = 0
-    let x: number = 0
-    let y: number = 0
-    let totalW: number = 0
-    let totalH: number = 0
-    let breakW: number = 0
+    let n = 0
+    let x = 0
+    let y = 0
+    let totalW = 0
+    let totalH = 0
+    let breakW = 0
 
     const gutter: number = opts.gutter!
     const parentWidth: number = container.parentElement!.offsetWidth
@@ -147,11 +155,11 @@ function createSortboard ({ container, blocks }: Elements, opts: Options): Sortb
   }
 
   function events (): void {
-    onResize(window, sort)
+    window.addEventListener('resize', sort, false)
   }
 
   function translate (item: HTMLElement, cords: string, hide: boolean): void {
-    const matrix: string = `matrix(1,0,0,1,${cords}) scale(${hide ? '0.001' : '1'})`
+    const matrix = `matrix(1,0,0,1,${cords}) scale(${hide ? '0.001' : '1'})`
 
     if (hide) {
       item.classList.add(opts.hiddenClass!)

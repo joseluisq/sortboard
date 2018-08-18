@@ -8,38 +8,31 @@ const travisLaunchers = {
 
 const localBrowsers = realBrowser ? Object.keys(travisLaunchers) : ['Chrome']
 
-module.exports = function (config) {
+module.exports = (config) => {
+  const env = process.env['NODE_ENV'] || 'development'
+
   config.set({
     frameworks: ['jasmine', 'karma-typescript'],
     plugins: [
       'karma-jasmine',
+      'karma-typescript',
       'karma-chrome-launcher',
-      'karma-spec-reporter',
-      'karma-typescript'
+      'karma-jasmine-html-reporter',
+      'karma-spec-reporter'
     ],
-    karmaTypescriptConfig: {
-      tsconfig: "./tsconfig.json",
-    },
     client: {
-      // leave Jasmine Spec Runner output visible in browser
-      clearContext: false
+      clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
-    files: [
-      { pattern: 'src/**/*.ts' },
-      { pattern: 'test/**/*.ts' }
-    ],
+    files: [{ pattern: 'src/**/*.ts' }, { pattern: 'test/**/*.spec.ts' }],
     preprocessors: {
-      'src/**/*.ts': ['karma-typescript'],
-      'test/**/*.ts': ['karma-typescript']
+      '**/*.ts': ['karma-typescript'],
+      'test/**/*.spec.ts': ['karma-typescript']
     },
-    karmaTypescriptConfig: {
-      tsconfig: "./tsconfig.json"
-    },
-    reporters: ['spec', 'karma-typescript'],
+    reporters: ['progress', 'kjhtml'],
     colors: true,
-    logLevel: config.LOG_INFO,
+    logLevel: env === 'debug' ? config.LOG_DEBUG : config.LOG_INFO,
     autoWatch: true,
     browsers: localBrowsers,
-    singleRun: true
+    singleRun: false
   })
 }

@@ -1,7 +1,7 @@
 *
-!/src/*.js
-!/src/*.map
-!/src/*.d.ts
+!/*.js
+!/*.map
+!/*.d.ts
 !README.md
 !LICENSE.md
 !package.json

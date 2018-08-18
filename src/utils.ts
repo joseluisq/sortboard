@@ -11,7 +11,3 @@ export function children (selector: string, parent?: HTMLElement | null): HTMLEl
 
   return Array.prototype.slice.call(parent.querySelectorAll(selector))
 }
-
-export function onResize (el: Window | Document | HTMLElement, fn: EventListener): void {
-  el.addEventListener('resize', fn, false)
-}
