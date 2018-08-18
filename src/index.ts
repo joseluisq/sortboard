@@ -89,8 +89,8 @@ function createSortboard ({ container, blocks }: Elements, opts: Options): Sortb
       }
 
       const data: string = item.getAttribute('data-filter').trim()
-      const regx: RegExp = pattern instanceof RegExp ? pattern : RegExp(pattern.toString())
-      const matchPattern: boolean = !!data && RegExp(regx, 'i').test(data)
+      const regx: RegExp = pattern instanceof RegExp ? pattern : RegExp(pattern)
+      const matchPattern: boolean = !!data && regx.test(data)
 
       if (!matchPattern) {
         notMatchedElements.push(item)

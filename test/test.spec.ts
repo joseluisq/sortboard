@@ -1,7 +1,7 @@
 import markup from './markup'
 import { Listener, sortboard, Sortboard } from '../src'
 
-markup()
+markup.init()
 
 describe('Sortboard', () => {
   let sb: Sortboard

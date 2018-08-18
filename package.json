@@ -4,16 +4,15 @@
   "description": "An small library for easy sorting and filtering of elements.",
   "repository": "joseluisq/sortboard",
   "license": "MIT",
-  "main": "src/index.js",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
   "author": {
     "name": "José Luis Quintana",
     "url": "http://git.io/joseluisq"
   },
   "files": [
-    "/src/index.js",
-    "/src/*.js",
-    "/src/*.map",
-    "/src/*.d.ts",
+    "/dist/*.js",
+    "/dist/*.d.ts",
     "README.md",
     "LICENSE.md"
   ],
