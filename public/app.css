@@ -1,0 +1,121 @@
+body {
+  font-family: 'Monaco', monospace;
+  background: rgba(226, 226, 226, 0.3);
+  cursor: default;
+  margin: 0;
+}
+
+h1,
+p {
+  text-align: center;
+  padding: 0;
+  display: block;
+  margin: 0;
+}
+
+p {
+  padding: 0;
+  color: #B0B0B0;
+}
+
+h1 {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-weight: normal;
+}
+
+#chessboard {
+  margin: 0 auto;
+  max-width: 800px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Filters */
+#filters {
+  text-align: center;
+  color: #b0b0b0;
+  font-size: 12px;
+  padding: 15px 0 0 0;
+}
+
+#filters a {
+  color: #2e3032;
+  margin-left: 0;
+  margin-right: 0;
+  text-decoration: none;
+  transition: all .2s ease-out;
+  font-size: 11px;
+}
+
+#filters a:hover,
+#filters a.active {
+  color: #d37070;
+}
+/* Sortlist */
+
+#sortlist {
+  position: relative;
+  display: block;
+  padding: 0;
+  margin: 1.5em auto;
+  overflow: hidden;
+  -webkit-transition: all 0.4s ease-out;
+  -moz-transition: all 0.4s ease-out;
+  transition: all 0.4s ease-out;
+}
+
+#sortlist li {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  display: block;
+  text-align: center;
+  font-size: 3.2em;
+  line-height: 1.6em;
+  overflow: hidden;
+  color: #868686;
+  background-color: #E9E9E9;
+  box-shadow: inset 0px 0px 0px 1px #CECECE;
+
+  -webkit-transition: all 0.4s ease-out;
+  -moz-transition: all 0.4s ease-out;
+  transition: all 0.4s ease-out;
+}
+
+#sortlist > li:hover {
+  color: #D17E7E;
+}
+
+/* Creating the chessboard */
+#sortlist li:nth-child(-2n+8),
+#sortlist li:nth-child(8) ~ li:nth-child(-2n+15),
+#sortlist li:nth-child(16) ~ li:nth-child(-2n+24),
+#sortlist li:nth-child(24) ~ li:nth-child(-2n+31),
+#sortlist li:nth-child(32) ~ li:nth-child(-2n+40),
+#sortlist li:nth-child(40) ~ li:nth-child(-2n+47),
+#sortlist li:nth-child(48) ~ li:nth-child(-2n+56),
+#sortlist li:nth-child(56) ~ li:nth-child(-2n+63) {
+  background-color: white;
+}
+
+#sortlist.filtered > li {
+  color: #D17E7E;
+  background-color: white;
+}
+
+.link {
+  font-size: 11px;
+  display: block;
+  padding: 2em 0;
+}
+
+.link a {
+  color: #2e3032;
+}
+
+@media screen and (max-width: 480px) {
+  #filters a {
+    margin: 20px 5px;
+  }
+}

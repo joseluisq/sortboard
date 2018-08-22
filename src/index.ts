@@ -88,7 +88,7 @@ function createSortboard ({ container, blocks }: Elements, opts: Options): Sortb
         return true
       }
 
-      const data: string = item.getAttribute('data-filter').trim()
+      const data: string = (item.getAttribute('data-filter') || '').toString().trim()
       const regx: RegExp = pattern instanceof RegExp ? pattern : RegExp(pattern)
       const matchPattern: boolean = !!data && regx.test(data)
 
