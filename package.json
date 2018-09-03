@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "@types/jasmine": "^2.5.54",
-    "@types/node": "^8.0.26",
+    "@types/node": "^10.9.4",
     "git-testing-hook": "^0.3.0",
     "jasmine-core": "^3.2.1",
     "jasmine-spec-reporter": "^4.2.1",
