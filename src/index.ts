@@ -126,7 +126,7 @@ function createSortboard ({ container, blocks }: Elements, opts: Options): Sortb
     blocks.forEach((child: HTMLElement) => {
       if (child.classList.contains(opts.hiddenClass!)) return
 
-      if (totalW >= parentWidth - child.offsetHeight - gutter) {
+      if (totalW >= parentWidth - child.offsetWidth - gutter) {
         totalW = 0
         y += child.offsetHeight + gutter
 
